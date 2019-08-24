@@ -80,7 +80,7 @@ def restart(): #이 함수는 오픈소스를 활용하여 만들었습니다. �
 
 def send_data_server(ble_data,host_name):
     mac_address=ble_data[:17]
-    rssi=ble_data[18:]
+    rssi=int(ble_data[18:])
 
     if rssi>-70:
         raspi=addr_confirm(mac_address)#어떤 라즈베리파이인지 알려준다.
