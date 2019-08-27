@@ -72,9 +72,10 @@ def restart(): #이 함수는 오픈소스를 활용하여 만들었습니다. �
 
 def send_ble_data_to_server(q,host_name):
     sock_data=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
+    SEVER="192.168.0.2"
+    PORT=8585
     while 1:
-        if sock_data.connect_ex(('192.168.0.2',8585)) != 0:
+        if sock_data.connect_ex((SEVER,PORT)) != 0:
             break
     while 1:
         if q.empty() is False:
@@ -85,19 +86,10 @@ def send_ble_data_to_server(q,host_name):
                 if rssi>-70:
                     raspi=addr_confirm(mac_address)#어떤 라즈베리파이인지 알려준다.
                     #mat_data=str(raspi)+" "+str(rssi) #매트랩에 작성하기 위한 파일, data모으고 matlab에서 load해서 데이터 만들기 편함
-                    send_data=str(host_name)+'%'+str(raspi)
                     if raspi is not False:
-                        #print(ble_data)
-                        #text.write(mat_data+'\r\n')
-                        #time.sleep(0.2)
-                        #print(send_data) #디스플레이 환경에서 확인하기 유용
-
-                        #이렇게 해야 바로 전송하고 접속을 끊어서 다음 데이터가 잘 들어갈 수 있다.
-                        #sock_data=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-                        #sock_data.connect_ex(('166.104.75.39',8585)) -> 실험실 실험에서는 이것으로 과기관 실험에서는 192.168.0.2로
-
+                        send_data=str(host_name)+'%'+str(raspi)
                         sock_data.send(send_data.encode())
-                        #sock_data.close()
+
 
 
 def get_ble_data(sock,q):
@@ -122,8 +114,6 @@ if __name__ == "__main__":
 
     q=multiprocessing.Queue()
     host_name=comfirm_hostname()
-
-
 
     p1 = multiprocessing.Process(target=get_ble_data,args=(sock,q))
     p2 = multiprocessing.Process(target=send_ble_data_to_server,args=(q,host_name))
