@@ -32,16 +32,16 @@ import queue
 reset_point=0
 
 def addr_confirm(addr):
-    addr_set=['b8:27:eb:48:de:38','b8:27:eb:aa:2a:fd','b8:27:eb:a5:11:b8','b8:27:eb:96:5f:48','b8:27:eb:17:d9:c0','b8:27:eb:52:1b:57','b8:27:eb:32:ac:9d',
+    ADDR_SET=['b8:27:eb:48:de:38','b8:27:eb:aa:2a:fd','b8:27:eb:a5:11:b8','b8:27:eb:96:5f:48','b8:27:eb:17:d9:c0','b8:27:eb:52:1b:57','b8:27:eb:32:ac:9d',
     'b8:27:eb:61:96:25','b8:27:eb:b9:87:55','b8:27:eb:db:fe:06','b8:27:eb:ed:d2:9a','b8:27:eb:99:54:56','b8:27:eb:b0:05:dd','b8:27:eb:57:e3:74',
     'b8:27:eb:af:b9:a5','b8:27:eb:38:cb:ca','b8:27:eb:90:aa:0c','b8:27:eb:3d:c0:38','b8:27:eb:e8:d2:e2','b8:27:eb:77:13:3d','b8:27:eb:3e:65:c9',
     'b8:27:eb:0f:6f:d2','b8:27:eb:d7:b7:5e','b8:27:eb:05:f4:5e','b8:27:eb:77:8e:e0','b8:27:eb:ae:e4:a7']
     #raspi_set=["0","1","2","3","4","5","6","7","8","9","10","11","12","13"]
-    set_num=len(addr_set)
+    set_num=len(ADDR_SET)
     run=False
 
     for i in range(0,set_num):
-        if(addr_set[i]==str(addr)):
+        if(ADDR_SET[i]==str(addr)):
             result=str(i)
             run=True
     if run is False:
